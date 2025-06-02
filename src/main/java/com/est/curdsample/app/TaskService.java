@@ -22,6 +22,16 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
+    @Transactional
+    public TaskDto checkTaskByCode(String code) {
+
+        Task task = findByCode(code);
+
+        task.updateCheck();
+
+        return TaskDto.from(task);
+    }
+
     public TaskPageDto getTaskList(int pageNum) {
 
         final int SIZE = 5;

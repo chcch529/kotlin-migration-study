@@ -42,6 +42,10 @@ public class Task {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
+    public void updateCheck(){
+        this.completeStatus = !this.completeStatus;
+    }
+
     public void update(TaskDto taskDto) {
 
         this.title = taskDto.getTitle();
