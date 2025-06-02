@@ -1,6 +1,7 @@
 package com.est.curdsample.domain;
 
 import com.est.curdsample.dto.TaskDto;
+import com.est.curdsample.util.TimeFormatter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,8 +49,8 @@ public class Task {
         this.priority = taskDto.getPriority();
         this.completeStatus = taskDto.isCompleteStatus();
 
-        this.startTime = taskDto.getStartTime();
-        this.endTime = taskDto.getEndTime();
+        this.startTime = TimeFormatter.convertToLocalDate(taskDto.getStartTime());
+        this.endTime = TimeFormatter.convertToLocalDate(taskDto.getEndTime());
     }
 
     public static Task of(TaskDto taskDto) {
@@ -59,8 +60,8 @@ public class Task {
         task.title = taskDto.getTitle();
         task.description = taskDto.getDescription();
         task.completeStatus = taskDto.isCompleteStatus();
-        task.startTime = taskDto.getStartTime();
-        task.endTime = taskDto.getEndTime();
+        task.startTime = TimeFormatter.convertToLocalDate(taskDto.getStartTime());
+        task.endTime = TimeFormatter.convertToLocalDate(taskDto.getEndTime());
 
         return task;
     }

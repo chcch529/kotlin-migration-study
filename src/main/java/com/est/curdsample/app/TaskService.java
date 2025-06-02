@@ -2,9 +2,16 @@ package com.est.curdsample.app;
 
 import com.est.curdsample.dao.TaskRepository;
 import com.est.curdsample.domain.Task;
+import com.est.curdsample.dto.TaskDescription;
 import com.est.curdsample.dto.TaskDto;
+import com.est.curdsample.dto.TaskPageDto;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +21,31 @@ import org.springframework.transaction.annotation.Transactional;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+
+    public TaskPageDto getTaskList(int pageNum) {
+
+        final int SIZE = 5;
+
+        PageRequest pageRequest = PageRequest.of(pageNum, SIZE, Direction.DESC, "createdAt");
+        Page<Task> tasks = taskRepository.findAll(pageRequest);
+
+        return new TaskPageDto(
+            tasks.hasNext(),
+            tasks.stream()
+                .map(TaskDto::from)
+                .toList());
+    }
+
+    public TaskDescription getDescriptionByCode(String code) {
+        return TaskDescription.from(findByCode(code));
+    }
+
+    public List<TaskDto> getTasksDueToToday() {
+        return taskRepository.findTenTasksDueToToday()
+            .stream()
+            .map(TaskDto::from)
+            .toList();
+    }
 
     @Transactional
     public TaskDto saveTask(TaskDto taskDto) {

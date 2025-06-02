@@ -1,0 +1,95 @@
+package com.est.curdsample.view;
+
+import com.est.curdsample.app.TaskService;
+import com.est.curdsample.dto.TaskDescription;
+import com.est.curdsample.dto.TaskDto;
+import com.est.curdsample.dto.TaskPageDto;
+import com.est.curdsample.dto.TodayTaskDto;
+import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Slf4j
+@Controller
+@RequiredArgsConstructor
+public class TaskViewController {
+
+    private final TaskService taskService;
+
+    @GetMapping("/")
+    public String showIndex(Model model) {
+
+        List<TaskDto> result = taskService.getTasksDueToToday();
+
+        model.addAttribute("tasks", TodayTaskDto.from(result));
+
+        return "index";
+    }
+
+    @GetMapping("/tasks")
+    public String showList(Model model, Pageable pageable) {
+
+        TaskPageDto taskList = taskService.getTaskList(pageable.getPageNumber());
+
+        model.addAttribute("tasks", taskList);
+
+        return "tasks/list";
+    }
+
+    @GetMapping("/tasks/more")
+    public String loadMoreTasks(int page, Model model) {
+
+        TaskPageDto taskList = taskService.getTaskList(page);
+
+        model.addAttribute("tasks", taskList);
+
+        return "fragments/page_parts :: taskPagePart";
+    }
+
+    @GetMapping("/tasks/append")
+    public String showAddPage(Model model) {
+
+        model.addAttribute("taskDto", new TaskDto());
+
+        return "tasks/add";
+    }
+
+    @PostMapping("/tasks/append")
+    public String addTask(@Valid TaskDto req, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("taskDto", req);
+            log.debug("입력이 잘못되어 오류페이지로 이동, {}", req.toString());
+            return "tasks/add";
+        }
+
+        taskService.saveTask(req);
+
+        return "redirect:/tasks/append";
+    }
+
+    @GetMapping("/tasks/{code}")
+    public String showTaskDetail(
+        @PathVariable String code,
+        Model model
+    ) {
+
+        TaskDescription description = taskService.getDescriptionByCode(code);
+
+        model.addAttribute("task", description);
+
+        return "tasks/detail";
+    }
+
+
+}
