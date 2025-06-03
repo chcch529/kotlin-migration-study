@@ -91,4 +91,23 @@ public class TaskViewController {
         return "tasks/detail";
     }
 
+    @GetMapping("/tasks/{code}/edit")
+    public String showEditPage(@PathVariable String code, Model model) {
+
+        TaskDto task = taskService.getByCode(code);
+
+        model.addAttribute("task", task);
+
+        return "tasks/edit";
+    }
+
+    @PostMapping("/tasks/{code}/edit")
+    public String updateTask(@PathVariable String code,
+        @Valid TaskDto req, BindingResult bindingResult) {
+
+        req.setCode(code);
+        taskService.update(req);
+
+        return "redirect:/tasks/" + code;
+    }
 }
