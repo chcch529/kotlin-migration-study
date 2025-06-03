@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Pattern
 
 data class TaskDto(
 
-    var code: String? = null,
+    var code: String,
 
     @field: NotBlank(message = "작업 이름은 반드시 입력되어야 합니다.")
     val title: String,
