@@ -34,6 +34,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:2.1.21'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
@@ -55,4 +58,10 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
