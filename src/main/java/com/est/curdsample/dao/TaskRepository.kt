@@ -13,5 +13,5 @@ interface TaskRepository : JpaRepository<Task, Long> {
                 "ORDER BY t.priority DESC " +
                 "LIMIT 10"
     )
-    fun findTenTasksDueToToday(): MutableList<Task?>?
+    fun findTenTasksDueToToday(): List<Task>
 }
