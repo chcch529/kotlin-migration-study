@@ -18,7 +18,7 @@ public class TodayTaskDto {
 
     public static TodayTaskDto from(List<TaskDto> tasks) {
         Map<Boolean, List<TaskDto>> result = tasks.stream()
-            .collect(Collectors.partitioningBy(TaskDto::isCompleteStatus));
+            .collect(Collectors.partitioningBy(TaskDto::getCompleteStatus));
 
         return new TodayTaskDto(
             result.get(false),
