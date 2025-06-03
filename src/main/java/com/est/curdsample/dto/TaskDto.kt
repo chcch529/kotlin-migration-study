@@ -53,7 +53,6 @@ data class TaskDto(
             taskDto.startTime = TimeFormatter.convertToString(task.startTime)
             taskDto.endTime = TimeFormatter.convertToString(task.endTime)
 
-
             return taskDto
         }
     }
