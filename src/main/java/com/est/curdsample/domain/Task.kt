@@ -76,7 +76,7 @@ fun Task.toDescription(): TaskDescription{
         completeStatus = this.completeStatus,
         startDate = TimeFormatter.convertToString(this.startTime),
         dueDate = TimeFormatter.convertToString(this.endTime),
-        createdAt = this.createdAt,
-        updatedAt = this.updatedAt
+        createdAt = TimeFormatter.converToString(this.createdAt),
+        updatedAt = TimeFormatter.converToString(this.updatedAt)
     )
 }
