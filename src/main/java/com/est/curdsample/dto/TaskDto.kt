@@ -8,27 +8,34 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import lombok.Data
 
-@Data
-class TaskDto {
-    private val code: String? = null
+data class TaskDto(
 
-    private val title: @NotBlank(message = "작업 이름은 반드시 입력되어야 합니다.") String? = null
+    var code: String? = null,
 
-    private val description: String? = null
+    @field: NotBlank(message = "작업 이름은 반드시 입력되어야 합니다.")
+    var title: String? = null,
 
-    private val priority: @Min(value = 0) Int? = null
+    var description: String? = null,
 
-    private val completeStatus = false
+    @field: Min(value = 0)
+    var priority: Int? = null,
 
-    private val startTime: @NotBlank(message = "날짜는 반드시 입력되어야 합니다.") @Pattern(
+    var completeStatus: Boolean = false,
+
+    @field: Pattern(
         regexp = "^(0[1-9]|1[0-2])/([0-2][0-9]|3[01])/\\d{4}$",
         message = "올바른 날짜를 입력하여 주시기 바랍니다."
-    ) String? = null
+    )
+    @field: NotBlank(message = "날짜는 반드시 입력되어야 합니다.")
+    var startTime: String? = null,
 
-    private val endTime: @NotBlank(message = "날짜는 반드시 입력되어야 합니다.") @Pattern(
+    @field: Pattern(
         regexp = "^(0[1-9]|1[0-2])/([0-2][0-9]|3[01])/\\d{4}$",
         message = "올바른 날짜를 입력하여 주시기 바랍니다."
-    ) String? = null
+    )
+    @field: NotBlank(message = "날짜는 반드시 입력되어야 합니다.")
+    var endTime: String? = null
+) {
 
     val priorityLevel: String
         get() = PriorityResolver.resolve(priority)
