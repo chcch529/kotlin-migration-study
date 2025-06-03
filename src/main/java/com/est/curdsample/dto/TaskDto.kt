@@ -41,16 +41,17 @@ data class TaskDto(
         get() = PriorityResolver.resolve(priority)
 
     companion object {
+        @JvmStatic
         fun from(task: Task): TaskDto {
             val taskDto = TaskDto()
 
-            taskDto.code(task.code)
-            taskDto.title(task.title)
-            taskDto.description(task.description)
-            taskDto.priority(task.priority)
-            taskDto.completeStatus(task.isCompleteStatus)
-            taskDto.startTime(TimeFormatter.convertToString(task.startTime))
-            taskDto.endTime(TimeFormatter.convertToString(task.endTime))
+            taskDto.code = task.code
+            taskDto.title = task.title
+            taskDto.description = task.description
+            taskDto.priority = task.priority
+            taskDto.completeStatus = task.completeStatus
+            taskDto.startTime = TimeFormatter.convertToString(task.startTime)
+            taskDto.endTime = TimeFormatter.convertToString(task.endTime)
 
 
             return taskDto
