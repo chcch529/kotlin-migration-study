@@ -2,7 +2,6 @@ package com.est.curdsample.dto
 
 import com.est.curdsample.domain.Task
 import com.est.curdsample.util.convertToLocalDate
-import com.est.curdsample.util.priorityResolve
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
@@ -33,12 +32,10 @@ data class TaskDto(
         message = "올바른 날짜를 입력하여 주시기 바랍니다."
     )
     @field: NotBlank(message = "날짜는 반드시 입력되어야 합니다.")
-    val endTime: String = ""
-) {
+    val endTime: String = "",
 
-    val priorityLevel: String
-        get() = priorityResolve(priority)
-}
+    val priorityLevel: String = ""
+)
 
 fun TaskDto.toEntity(): Task {
     return Task(

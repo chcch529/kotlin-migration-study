@@ -13,7 +13,7 @@
                       <a th:href="@{~/tasks/{code}(code=${task.code})}">
                           [[ ${task.title} ]]
                       </a>
-                      <div class="badge font-bold" th:classappend="${task.getPriorityLevel()}">
+                      <div class="badge font-bold" th:classappend="${task.priorityLevel}">
                           [[ ${task.priority} ]]
                       </div>
                   </div>

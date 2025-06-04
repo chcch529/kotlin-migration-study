@@ -39,7 +39,7 @@
                           <div class="flex items-center gap-3">
                               <div class="flex flex-col">
                                   <div
-                                      th:classappend="${task.getPriorityLevel()}"
+                                      th:classappend="${task.priorityLevel}"
                                       class="font-bold mb-2">
                                       <a th:href="@{~/tasks/{code}(code=${task.code})}">
                                         [[ ${task.title} ]]

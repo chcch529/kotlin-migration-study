@@ -1,7 +1,5 @@
 package com.est.curdsample.dto
 
-import com.est.curdsample.util.priorityResolve
-
 data class TaskDescription(
 
     val code: String,
@@ -12,11 +10,7 @@ data class TaskDescription(
     val startDate: String,
     val dueDate: String,
     val createdAt: String,
-    val updatedAt: String
-
-) {
-
+    val updatedAt: String,
     val priorityLevel: String
-        get() = priorityResolve(priority)
-}
 
+)

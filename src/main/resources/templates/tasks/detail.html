@@ -10,7 +10,7 @@
 
         <div class="text-3xl font-bold flex items-center gap-4">
             <div>[[ ${task.title} ]]</div>
-            <div class="badge font-bold" th:classappend="${task.getPriorityLevel()}">
+            <div class="badge font-bold" th:classappend="${task.priorityLevel}">
                 [[ ${task.priority} ]]
             </div>
             <div class="flex-grow"></div>
