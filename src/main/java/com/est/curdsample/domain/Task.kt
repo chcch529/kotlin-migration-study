@@ -2,7 +2,8 @@ package com.est.curdsample.domain
 
 import com.est.curdsample.dto.TaskDescription
 import com.est.curdsample.dto.TaskDto
-import com.est.curdsample.util.TimeFormatter
+import com.est.curdsample.util.convertToLocalDate
+import com.est.curdsample.util.convertToString
 import jakarta.persistence.*
 import lombok.Setter
 import java.time.LocalDate
@@ -49,8 +50,8 @@ class Task(
         this.priority = taskDto.priority
         this.completeStatus = taskDto.completeStatus
 
-        this.startTime = TimeFormatter.convertToLocalDate(taskDto.startTime)
-        this.endTime = TimeFormatter.convertToLocalDate(taskDto.endTime)
+        this.startTime = convertToLocalDate(taskDto.startTime)
+        this.endTime = convertToLocalDate(taskDto.endTime)
     }
 
 }
@@ -62,21 +63,21 @@ fun Task.toDto(): TaskDto {
         description = this.description,
         priority = this.priority,
         completeStatus = this.completeStatus,
-        startTime = TimeFormatter.convertToString(this.startTime),
-        endTime = TimeFormatter.convertToString(this.endTime),
+        startTime = convertToString(this.startTime),
+        endTime = convertToString(this.endTime),
     )
 }
 
-fun Task.toDescription(): TaskDescription{
+fun Task.toDescription(): TaskDescription {
     return TaskDescription(
         code = this.code,
         title = this.title,
         description = this.description,
         priority = this.priority,
         completeStatus = this.completeStatus,
-        startDate = TimeFormatter.convertToString(this.startTime),
-        dueDate = TimeFormatter.convertToString(this.endTime),
-        createdAt = TimeFormatter.converToString(this.createdAt),
-        updatedAt = TimeFormatter.converToString(this.updatedAt)
+        startDate = convertToString(this.startTime),
+        dueDate = convertToString(this.endTime),
+        createdAt = convertToString(this.createdAt),
+        updatedAt = convertToString(this.updatedAt)
     )
 }

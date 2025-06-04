@@ -30,7 +30,6 @@ class TaskApiController(
         taskService.removeByCode(code)
 
         return GeneralApiResponse(
-            data = null,
             msg = "성공적으로 삭제되었습니다."
         )
     }

@@ -1,8 +1,6 @@
 package com.est.curdsample.dto
 
-import com.est.curdsample.domain.Task
-import com.est.curdsample.util.PriorityResolver
-import com.est.curdsample.util.TimeFormatter
+import com.est.curdsample.util.priorityResolve
 
 data class TaskDescription(
 
@@ -19,6 +17,6 @@ data class TaskDescription(
 ) {
 
     val priorityLevel: String
-        get() = PriorityResolver.resolve(priority)
+        get() = priorityResolve(priority)
 }
 
