@@ -1,14 +1,5 @@
-package com.est.curdsample.app
+package com.est.curdsample
 
-import com.est.curdsample.dao.TaskRepository
-import com.est.curdsample.domain.Task
-import com.est.curdsample.domain.toDescription
-import com.est.curdsample.domain.toDto
-import com.est.curdsample.dto.TaskDescription
-import com.est.curdsample.dto.TaskDto
-import com.est.curdsample.dto.TaskPageDto
-import com.est.curdsample.dto.toEntity
-import com.est.curdsample.exception.TaskNotFoundException
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Slice
 import org.springframework.data.domain.Sort

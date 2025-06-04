@@ -1,9 +1,5 @@
-package com.est.curdsample.api
+package com.est.curdsample
 
-import com.est.curdsample.app.TaskService
-import com.est.curdsample.dto.GeneralApiResponse
-import com.est.curdsample.dto.TaskDto
-import lombok.RequiredArgsConstructor
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 

@@ -1,6 +1,5 @@
-package com.est.curdsample.dao
+package com.est.curdsample
 
-import com.est.curdsample.domain.Task
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 

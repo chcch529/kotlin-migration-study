@@ -1,10 +1,23 @@
-package com.est.curdsample.dto
+package com.est.curdsample
 
-import com.est.curdsample.domain.Task
-import com.est.curdsample.util.convertToLocalDate
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
+
+data class TaskDescription(
+
+    val code: String,
+    val title: String,
+    val description: String,
+    val priority: Int,
+    val completeStatus: Boolean,
+    val startDate: String,
+    val dueDate: String,
+    val createdAt: String,
+    val updatedAt: String,
+    val priorityLevel: String
+
+)
 
 data class TaskDto(
 
@@ -37,14 +50,17 @@ data class TaskDto(
     val priorityLevel: String = ""
 )
 
-fun TaskDto.toEntity(): Task {
-    return Task(
-        code = this.code,
-        title = this.title,
-        description = this.description,
-        priority = this.priority,
-        completeStatus = this.completeStatus,
-        startTime = convertToLocalDate(this.startTime),
-        endTime = convertToLocalDate(this.endTime),
-    )
-}
+data class TaskPageDto(
+    val hasNext: Boolean,
+    val data: List<TaskDto> = mutableListOf()
+)
+
+data class TodayTaskDto(
+    val uncompletedTasks: List<TaskDto>,
+    val completedTasks: List<TaskDto>
+)
+
+data class GeneralApiResponse<T>(
+    val data: T? = null,
+    val msg: String
+)

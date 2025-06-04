@@ -1,8 +1,5 @@
-package com.est.curdsample.view
+package com.est.curdsample
 
-import com.est.curdsample.app.TaskService
-import com.est.curdsample.dto.TaskDto
-import com.est.curdsample.dto.toTodayTasks
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Controller
